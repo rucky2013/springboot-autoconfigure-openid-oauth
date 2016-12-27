@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.alexbt.autoconfigure.openid.OpenIdAutoConfiguration,\
+com.alexbt.autoconfigure.oauth.OAuthAutoConfiguration

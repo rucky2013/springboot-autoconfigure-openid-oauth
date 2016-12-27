@@ -1,0 +1,7 @@
+/bower_components/
+/node_modules/
+/built/
+/node/
+/dist/
+/npm-debug.log
+/etc

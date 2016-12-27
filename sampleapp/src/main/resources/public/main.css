@@ -1,0 +1,169 @@
+/* Main Page Layout - body, content, header, footer... */
+/* Inspired by :
+	- http://www.htmlgoodies.com/beyond/css/css-ref/building-responsive-web-page-headers.html
+*/
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+.container {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;																																																																																																																																																																																																																																																																																																										
+  max-width: 1100px;
+  font-family: helvetica, sans-serif;
+}
+.content {
+  position: relative;
+  padding-top: 80px;
+}
+.content p {
+  margin-bottom: 10px;
+}
+form {
+     display:inline;
+     margin:0px;
+     padding:0px;
+}
+
+#header {
+  z-index: 2;
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  line-height: 60px;
+  background: black;
+  color: white;
+}
+#header a:visited { 
+    color: white;
+}
+#header h1 {
+  top: 0px;
+  margin: 0px;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+
+#footer {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  width: 100%;
+  height:30px;
+  line-height: 30px;
+  text-align: center;
+  background: white;
+  color: black;
+  font-size: 75%;
+}
+
+
+/*****************************/
+/* Menu */
+#nav_left {
+  position: absolute;
+  left: 0;
+  top: -15px;
+  height: 60px;
+}
+#nav_right {
+  position: absolute;
+  right: 0;
+  top: -15px;
+  height: 60px;
+}
+nav ul li {
+  float: left;
+  list-style: none;
+}
+nav ul li a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  padding: 0 10px;
+}
+
+#wrap{
+    position:relative; 
+    width:100%; 
+    height:100%;
+}
+.inline {
+    display: inline;
+    white-space: nowrap;
+}
+
+
+/*****************************/
+/* title */
+.title {
+    font-size: 125%
+}
+
+.table-footnote {
+    font-size: 75%
+}
+
+/* message in center */
+.center {
+    text-align: center;
+    width: 100%;
+}
+
+.lowercase {
+	text-transform: lowercase;
+}
+
+.minwidth {
+    width: 250px;
+}
+
+.maxwidth {
+    width: 250px;
+}
+
+/*****************************/
+/* subscriptions-table */
+/* inspired by http://www.the-art-of-web.com/html/table-markup */
+table.subscriptions-table {
+    margin: 1em auto;
+    border-collapse: collapse;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .subscriptions-table th, .subscriptions-table td {
+    padding: 4px 8px;
+  }
+  .subscriptions-table thead th {
+    background: #4f81bd;
+    text-align: left;
+    font-size: 15px;
+    color: #fff;
+  }
+  .subscriptions-table tr {
+    border-right: 1px solid #95b3FF;
+    border-left: 1px solid #95b3FF;
+    vertical-align: text-top;
+  }
+  .subscriptions-table tbody tr {
+    border-bottom: 1px solid #95b3FF;
+  }
+  .subscriptions-table tbody tr:nth-child(odd) {
+    background: #cbdae7;
+  }
+  .subscriptions-table tbody th, .subscriptions-table tbody tr:nth-child(even) td {
+    background: #edf2f7;
+  }
+  .subscriptions-table tfoot th {
+    background: #4f81bd;
+    text-align: left;
+    font-weight: normal;
+    font-size: 10px;
+    color: #fff;
+  }

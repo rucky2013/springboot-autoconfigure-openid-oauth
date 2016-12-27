@@ -1,0 +1,38 @@
+alexbt:
+
+  oauth:
+    enabled: true
+    authority: MARKETPLACE_APPDIRECT
+    secured-uri-pattern: /api/**
+    urlParam: url
+    key: alexbts-sampleapp-145787
+    secret: V88fbRJpfk3QRJzH
+
+  openid:
+    enabled: true
+    authority: USER_APPDIRECT
+    secured-uri-pattern: /client/**
+    providers:
+      appdirect:
+        login: https://marketplace.appdirect.com/openid/id
+        logout: https://marketplace.appdirect.com/applogout?openid={alexbt.openId.placeholder}
+    attributeExchange:
+      pattern: .*appdirect.com.*
+      properties:
+        companyUuid: https://www.appdirect.com/schema/company/uuid
+        fullName: http://axschema.org/namePerson
+        email: http://axschema.org/contact/email
+        uuid: https://www.appdirect.com/schema/user/uuid
+        companyName: http://axschema.org/company/name
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://mongo:mongo@ds133388.mlab.com:33388/alexbt-appdirect-sampleapp
+      
+logging:
+  level:
+    org.springframework.security: WARN
+    org.springframework.web.filter.CommonsRequestLoggingFilter: DEBUG
+    com.alexbt: DEBUG
+logging.pattern.console: '[%thread] %-5level %logger{36} - %msg%n'

@@ -1,0 +1,101 @@
+{  
+   "type":"SUBSCRIPTION_CHANGE",
+   "marketplace":{  
+      "partner":"APPDIRECT",
+      "baseUrl":"https://marketplace.appdirect.com"
+   },
+   "applicationUuid":"appUuid",
+   "flag":"DEVELOPMENT",
+   "creator":{  
+      "uuid":"90f7c0a6-f59a-419a-926a-c6e9af28c10e",
+      "openId":"https://marketplace.appdirect.com/openid/id/90f7c0a6-f59a-419a-926a-c6e9af28c10e",
+      "email":"alex.belisleturcot@gmail.com",
+      "firstName":"Alex",
+      "lastName":"Belisle Turcot",
+      "language":"en",
+      "locale":"en-US",
+      "address":{  
+         "firstName":"Alex",
+         "lastName":"Belisle Turcot",
+         "fullName":"Alex Belisle Turcot",
+         "phone":"5147955769",
+         "phoneExtension":null,
+         "street1":"1234 bd Mont-Royal",
+         "street2":"street2-value",
+         "city":"Montreal",
+         "state":"QC",
+         "zip":"H4E 3C8",
+         "country":"CA"
+      },
+      "attributes":{  
+          "favoriteColor":"green",
+          "hourlyRate":"40"
+       }
+   },
+   "payload":{"user":{"uuid":"90f7c0a6-f59a-419a-926a-c6e9af28c10e",
+	         "openId":"https://marketplace.appdirect.com/openid/id/90f7c0a6-f59a-419a-926a-c6e9af28c10e",
+	         "email":"alex.belisleturcot@gmail.com",
+	         "firstName":"Alex",
+	         "lastName":"Belisle Turcot",
+	         "language":"en",
+	         "locale":"en-US",
+	         "address":{  
+	            "firstName":"Alex",
+	            "lastName":"Belisle Turcot",
+	            "fullName":"Alex Belisle Turcot",
+	            "phone":"5147955769",
+	            "street1":"1234 bd Mont-Royal",
+	            "street2":"street2-value",
+	            "city":"Montreal",
+	            "state":"QC",
+	            "zip":"H4E 3C8",
+	            "country":"CA"
+	         },
+	         "attributes":{  
+	             "favoriteColor":"green",
+	             "hourlyRate":"40"
+	          }
+	      },
+      "company":{  
+          "uuid":"d241c44b-16ca-4c12-aa4a-34959066a577",
+          "externalId":"extId",
+          "name":"Proserus",
+          "email":"alex.belisleturcot@gmail.com",
+          "phoneNumber":"5147955769",
+          "website":"ca.linkedin.com/in/alexbt",
+          "country":"US"
+       },
+      "account":{  
+         "accountIdentifier":"accId",
+         "status":"ACTIVE"
+      },
+      "addonInstance":{
+    	  "id": "5"
+      },
+      "order":{  
+         "editionCode":"FREE",
+         "addonOfferingCode":"offeringCode",
+         "pricingDuration":"MONTHLY",
+         "items":[
+			{  
+			    "unit":"USER",
+			    "quantity":20
+			 },
+			 {  
+			    "unit":"MEGABYTE",
+			    "quantity":15
+			 }
+         ]
+      },
+      "notice":{  
+          "type":"REACTIVATED",
+          "message":"msg"
+       },
+      "configuration":{  
+    	  "config1": "value",
+    	  "config2": "value"
+
+      }
+   },
+   "returnUrl":"returnUrl"
+}

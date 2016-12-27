@@ -1,0 +1,68 @@
+{  
+   "type":"USER_ASSIGNMENT",
+   "marketplace":{  
+      "partner":"APPDIRECT",
+      "baseUrl":"https://marketplace.appdirect.com"
+   },
+   "applicationUuid":null,
+   "flag":"DEVELOPMENT",
+   "creator":{  
+      "uuid":"e3c44f06-5254-4fe8-a741-a321cd45a0b6",
+      "openId":"https://marketplace.appdirect.com/openid/id/e3c44f06-5254-4fe8-a741-a321cd45a0b6",
+      "email":"test_test31@yahoo.com",
+      "firstName":"Test1",
+      "lastName":"Test2",
+      "language":"en",
+      "locale":"en-US",
+      "address":null,
+      "attributes":null
+   },
+   "payload":{  
+      "user":{  
+         "uuid":"90f7c0a6-f59a-419a-926a-c6e9af28c10e",
+         "openId":"https://marketplace.appdirect.com/openid/id/90f7c0a6-f59a-419a-926a-c6e9af28c10e",
+         "email":"alex.belisleturcot@gmail.com",
+         "firstName":"Alex",
+         "lastName":"Belisle Turcot",
+         "language":"en",
+         "locale":"en-US",
+         "address":{  
+            "salutation":null,
+            "firstName":"Alex",
+            "lastName":"Belisle Turcot",
+            "fullName":"Alex Belisle Turcot",
+            "companyName":null,
+            "phone":"5147955769",
+            "phoneExtension":null,
+            "fax":null,
+            "faxExtension":null,
+            "street1":"7005 Rue Hamilton",
+            "street2":null,
+            "city":"Montreal",
+            "state":"QC",
+            "zip":"H4E 3C8",
+            "country":"CA",
+            "pobox":null,
+            "pozip":null
+         },
+         "attributes":null
+      },
+      "company":null,
+      "account":{  
+         "accountIdentifier":"e3c44f06-5254-4fe8-a741-a321cd45a0b6",
+         "status":"ACTIVE",
+         "parentAccountIdentifier":null
+      },
+      "addonInstance":null,
+      "addonBinding":null,
+      "order":null,
+      "notice":null,
+      "configuration":{  
+
+      }
+   },
+   "returnUrl":null,
+   "links":[  
+
+   ]
+}
