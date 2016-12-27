@@ -7,7 +7,7 @@ Table of contents
 5. [How to Launch](#how-to-launch)
 6. [Assumptions](#assumptions)
 7. [Design, Implementation & Technical Decisions](#design-implementation-technical-decisions)
-8. [Integration tests](#integration-tests)
+8. [Tests](#tests)
 
 
 
@@ -158,17 +158,14 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
 
 
 
-<a name="integration-tests"/>
+<a name="tests"/>
 8) Tests
 ====================
-##Unit tests
-
-##Integration Reports
-
-##Account section
+###Unit tests
+###Integration Reports
+###Account section
 - Upcoming Invoice
 - Suspend Account
 - Reactivate Account
 - Cancel Account
-
-##Run Ping Tests
+###Run Ping Tests
