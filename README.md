@@ -22,23 +22,18 @@ To access the application, open a browser to https://alexbt-appdirect-sampleapp.
 <a name="repository-structure"/>
 2) Repository structure
 ===========================
-My main concern was ensuring that the application can easily be built (in case anyone needs to rebuild it).
 The repository is composed of 3 projects, built by an aggregator pom.xml (not a parent structure):
 
 - appdirect-notifications-model;
 - springboot-autoconfigure-oauth;
 - sampleapp.
 
-Once the evaluation phase is pass, I will convert this into 3 repositories and release both appdirect-notifications-model and springboot-autoconfigure-oauth to the maven central. 
-Developing future AppDirect applications wouldn't require recoding the notification model and the oauth layer.
-
-In the mean time, this structure allow anyone to just clone the repository, build and run it.
-
+I setup this structure so that it is easy to build (in case anyone needs to rebuild it). After the challenge, I will convert this into 3 repositories. The appdirect-notifications-model and springboot-autoconfigure-oauth will then be fully reusable for other Applications (not just this 'Sample Application').
 
 <a name="appdirect-integration"/>
 3) AppDirect Integration
 =============================
-My AppDirect Developer account points to this location:
+The application supports several AppDirect integration points:
 
 **create:**
 https://alexbt-appdirect-sampleapp.herokuapp.com/api/subscription/create/notification?url={eventUrl} 
@@ -67,7 +62,6 @@ OAuth Consumer Key: testing-133596
 OAuth Consumer Secret: IkFEuaOGAYIivsEP
 
 
-
 <a name="how-to-build"/>
 4) How to build
 ==================
@@ -78,7 +72,7 @@ Building and running the application requires:
 - git
 - Minimal console skills :)
 
-After download the project from github, open a console into the unzipped folder and type:
+After downloading the project from github, open a console into the unzipped folder and type:
     
     mvn clean install
     
@@ -99,15 +93,13 @@ This will generate several reports, (see `./target/site/project-reports.html`):
 ================
 After building the application, go to `./sampleapp/target` folder and type:
 
-    java -jar sampleapp-1.0.1-SNAPSHOT.jar
+    java -jar sampleapp-1.0.0.jar
 
 
 
 <a name="assumptions"/>
 6) Assumptions
 =================
-- Account Identifier: I used a generated UUID for the unique Account Identifier;
-
 - HttpStatus 200: All the answer (success and failure) are returned with HttpStatus 200, except authorization error which returns 401s.
 
 - Creator: I defined the 'creator' field as mandatory for Create notification (optional for all other notification);
@@ -140,13 +132,13 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
 
 - OpenId/OAuth Project: This project is a Spring Boot Autoconfiguration, it kicks in just by adding its dependency to a Spring Boot project;
 
+- Account Identifier: I used a generated UUID for the unique Account Identifier;
+
 - Application configuration: Most (if not all) application configuration is done in the Spring Boot's application.yml;
 
 - Static Code Analysis: The build generates checkstyle, findbugs and jacoco reports. I used them to keep the code clean, avoid obvious bugs and ensure critical components were tests;
 
-- TDD: I somewhat followed the TDD methodology (not rigorously writing tests first), but still writing unit tests as I designed & wrote code.
-
-- PricingDuration and PricingUnit: For these 2 fields, I am uncertain of the possible values, and since I do not perform any logic based on their values, I mapped them to a String (as opposed to a strongly typed enum);
+- TDD: I somewhat followed the TDD methodology, not so much writing tests 'first' but still writing unit tests as I designed & wrote code.
 
 - CSRF: I chose to disable CSRF for the purpose of this Sample Application;
 
@@ -154,12 +146,12 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
 
 - Deployed: The application is deployed on heroku as an executable spring boot jar and uses a MongoDB instance on mlab.com. For the purpose of this challenge, the user/password are hardcoded in the configuration. A better alternative would be to define the password as an Heroku environment variable;
 
-- Continuous deployment: Throughout the development, my Application was continuously being deployed to Heroku at every commit to github (was using bitbucket with pipelines during development).
+- Continuous deployment: Throughout the development, the Application was continuously being deployed to Heroku at every commit (was using bitbucket with pipelines during development).
 
 
 
 <a name="tests"/>
-8) Tests
+8) Tests (TODO)
 ====================
 ###Unit tests
 ###Integration Reports
