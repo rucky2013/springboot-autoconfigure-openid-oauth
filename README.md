@@ -11,11 +11,8 @@ Table of contents
 
 
 
-#1) Continuous Deployment
+#1) Continuous Deployment <a name="continuous-deployment"/>
 =============================
-
-<a name="continuous-deployment"/>
-
 This github repository is "monitored" by Heroku and is automatically deployed to https://alexbt-appdirect-sampleapp.herokuapp.com at each commit.
 
 To access the application, open a browser to https://alexbt-appdirect-sampleapp.herokuapp.com
