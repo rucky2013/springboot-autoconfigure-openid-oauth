@@ -12,7 +12,7 @@ Table of contents
 
 
 <a name="continuous-deployment"/>
-#1) Continuous Deployment 
+1) Continuous Deployment 
 =============================
 This github repository is "monitored" by Heroku and is automatically deployed to https://alexbt-appdirect-sampleapp.herokuapp.com at each commit.
 
@@ -20,7 +20,7 @@ To access the application, open a browser to https://alexbt-appdirect-sampleapp.
 
 
 <a name="repository-structure"/>
-#2) Repository structure
+2) Repository structure
 ===========================
 My main concern was ensuring that the application can easily be built (in case anyone needs to rebuild it).
 The repository is composed of 3 projects, built by an aggregator pom.xml (not a parent structure):
@@ -36,7 +36,7 @@ In the mean time, this structure allow anyone to just clone the repository, buil
 
 
 <a name="appdirect-integration"/>
-#3) AppDirect Integration
+3) AppDirect Integration
 =============================
 My AppDirect Developer account points to this location:
 
@@ -69,7 +69,7 @@ OAuth Consumer Secret: IkFEuaOGAYIivsEP
 
 
 <a name="how-to-build"/>
-#4) How to build
+4) How to build
 ==================
 Building and running the application requires:
 
@@ -104,7 +104,7 @@ After building the application, go to `./sampleapp/target` folder and type:
 
 
 <a name="assumptions"/>
-#6) Assumptions
+6) Assumptions
 =================
 - Account Identifier: I used a generated UUID for the unique Account Identifier;
 
@@ -130,7 +130,7 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
  
 
 <a name="design-implementation-technical-decisions"/>
-#7) Design, Implementation & Technical Decisions
+7) Design, Implementation & Technical Decisions
 ====================================
 - Focus: My main focus during development was to ensure that the code is testable, simple and reusable;
 
@@ -159,7 +159,7 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
 
 
 <a name="integration-tests"/>
-#8) Tests
+8) Tests
 ====================
 ##Unit tests
 
