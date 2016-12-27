@@ -19,11 +19,9 @@ This github repository is "monitored" by Heroku and is automatically deployed to
 To access the application, open a browser to https://alexbt-appdirect-sampleapp.herokuapp.com
 
 
+<a name="repository-structure"/>
 #2) Repository structure
 ===========================
-
-<a name="repository-structure"/>
-
 My main concern was ensuring that the application can easily be built (in case anyone needs to rebuild it).
 The repository is composed of 3 projects, built by an aggregator pom.xml (not a parent structure):
 
@@ -37,11 +35,9 @@ Developing future AppDirect applications wouldn't require recoding the notificat
 In the mean time, this structure allow anyone to just clone the repository, build and run it.
 
 
+<a name="appdirect-integration"/>
 #3) AppDirect Integration
 =============================
-
-<a name="appdirect-integration"/>
-
 My AppDirect Developer account points to this location:
 
 **create:**
@@ -72,11 +68,9 @@ OAuth Consumer Secret: IkFEuaOGAYIivsEP
 
 
 
+<a name="how-to-build"/>
 #4) How to build
 ==================
-
-<a name="how-to-build"/>
-
 Building and running the application requires:
 
 - JDK 8
@@ -100,23 +94,18 @@ This will generate several reports, (see `./target/site/project-reports.html`):
 - `apidocs` for the javadoc API documentation.
 
 
-
+<a name="how-to-launch"/>
 5) How to Launch
 ================
-
-<a name="how-to-launch"/>
-
 After building the application, go to `./sampleapp/target` folder and type:
 
     java -jar sampleapp-1.0.1-SNAPSHOT.jar
 
 
 
+<a name="assumptions"/>
 #6) Assumptions
 =================
-
-<a name="assumptions"/>
-
 - Account Identifier: I used a generated UUID for the unique Account Identifier;
 
 - HttpStatus 200: All the answer (success and failure) are returned with HttpStatus 200, except authorization error which returns 401s.
@@ -140,11 +129,9 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
  
  
 
+<a name="design-implementation-technical-decisions"/>
 #7) Design, Implementation & Technical Decisions
 ====================================
-
-<a name="design-implementation-technical-decisions"/>
-
 - Focus: My main focus during development was to ensure that the code is testable, simple and reusable;
 
 - 3 Projects: I split the application into 3 projects: OAuth/OpenId configuration, AppDirect Notification Model and the actual Application. The OAuth/OpenId and Notification Model would be reusable fit the development of another Marketplace Application. I reunited the 3 projects into a single repository just for the purpose of this challenge. I'll later split them into 3 distincts repository: each would have its own development and deployment lifecycle;
@@ -171,11 +158,9 @@ I did not cover for this scenario, I can only suppose I could reject simultaneou
 
 
 
+<a name="integration-tests"/>
 #8) Tests
 ====================
-
-<a name="integration-tests"/>
-
 ##Unit tests
 
 ##Integration Reports
