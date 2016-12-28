@@ -36,11 +36,6 @@ public abstract class AbstractController extends AbstractOAuthController<Notific
     @Value("${alexbt.oauth.authority}")
     private String oauthAuthority;
 
-    @Override
-    public String getOAuthAuthority() {
-        return oauthAuthority;
-    }
-
     /**
      * Handles the notification request
      */
