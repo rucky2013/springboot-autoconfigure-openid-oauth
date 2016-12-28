@@ -27,7 +27,7 @@ public abstract class AbstractExistingControllerTest extends AbstractControllerT
     public void testAccountNotFound() throws Exception {
         doThrow(new AccountNotFoundException("message")).when(notificationValidate).accountExists(any(Account.class));
 
-        assertControllerReturns(ErrorCode.ACCOUNT_NOT_FOUND, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.ACCOUNT_NOT_FOUND, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 

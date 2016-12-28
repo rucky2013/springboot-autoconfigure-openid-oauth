@@ -20,7 +20,7 @@ public class UserUnassignControllerTest extends AbstractExistingControllerTest {
     public void testUserNotExist() throws Exception {
         doThrow(new UserNotFoundException("message")).when(notificationValidate).userExists(any(User.class));
 
-        assertControllerReturns(ErrorCode.USER_NOT_FOUND, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.USER_NOT_FOUND, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 

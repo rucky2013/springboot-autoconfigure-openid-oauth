@@ -1,11 +1,10 @@
 package com.alexbt.appdirect.sampleapp.notifications.exception;
 
-import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.doThrow;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URISyntaxException;
@@ -37,8 +36,10 @@ import com.alexbt.appdirect.sampleapp.notifications.controller.CreateController;
 import com.alexbt.appdirect.sampleapp.notifications.dao.SubscriptionRepository;
 import com.alexbt.appdirect.sampleapp.notifications.service.SubscriptionService;
 import com.alexbt.appdirect.sampleapp.notifications.util.NotificationValidate;
+import com.alexbt.appdirect.sampleapp.notifications.util.TestErrorResponse;
 import com.alexbt.appdirect.sampleapp.util.WebConstants;
 import com.alexbt.autoconfigure.oauth.controller.TwoLeggedControllerHelper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 //Technically, the exceptions are tested through the Controller tests.
 //However, this tests is a sanity check (using Reflection) that all exceptions are tested and caught.
@@ -61,6 +62,8 @@ public class AllExceptionCaughtTest {
 
     @MockBean
     private Notification notification;
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
     public void before() throws URISyntaxException {
@@ -89,10 +92,10 @@ public class AllExceptionCaughtTest {
     }
 
     private void assertResponseErrorCode(ErrorCode errorCode, ResultActions resultActions) throws Exception {
-        resultActions.andExpect(status().isOk()) //
-                .andExpect(content().string(containsString("\"success\" : false"))) //
-                .andExpect(content().string(containsString("\"errorCode\" : \"" + errorCode.getId() + "\""))) //
-                .andExpect(content().string(containsString("\"message\" : ")));
+        resultActions.andExpect(status().isOk());
+        TestErrorResponse response = objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), TestErrorResponse.class);
+        assertEquals(false, response.isSuccess());
+        assertEquals(errorCode, response.getErrorCode());
     }
 
     @Test

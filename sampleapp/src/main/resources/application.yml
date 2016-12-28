@@ -26,6 +26,12 @@ alexbt:
         companyName: http://axschema.org/company/name
 
 spring:
+  jackson:
+    deserialization:
+      read_enums_using_to_string: true
+      fail_on_unknown_properties: false
+    serialization:
+      write_enums_using_to_string: true
   data:
     mongodb:
       uri: mongodb://mongo:mongo@ds133388.mlab.com:33388/alexbt-appdirect-sampleapp

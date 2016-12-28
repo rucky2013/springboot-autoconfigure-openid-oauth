@@ -1,6 +1,7 @@
 package com.alexbt.appdirect.sampleapp.notifications.controller;
 
-import static org.hamcrest.core.StringContains.containsString;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
@@ -8,7 +9,6 @@ import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URISyntaxException;
@@ -42,8 +42,10 @@ import com.alexbt.appdirect.sampleapp.notifications.exception.UnauthorizedExcept
 import com.alexbt.appdirect.sampleapp.notifications.model.Subscription;
 import com.alexbt.appdirect.sampleapp.notifications.service.SubscriptionService;
 import com.alexbt.appdirect.sampleapp.notifications.util.NotificationValidate;
+import com.alexbt.appdirect.sampleapp.notifications.util.TestErrorResponse;
 import com.alexbt.appdirect.sampleapp.util.WebConstants;
 import com.alexbt.autoconfigure.oauth.controller.TwoLeggedControllerHelper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(SpringRunner.class)
 @WithMockUser(authorities = WebConstants.MARKETPLACE_USER)
@@ -67,6 +69,8 @@ public abstract class AbstractControllerTest {
     @MockBean
     private SubscriptionRepository subscriptionRepository;
 
+    private ObjectMapper objectMapper = new ObjectMapper();
+
     protected String getUrl() {
         Class<?> controllerBeingTested = this.getClass().getAnnotation(WebMvcTest.class).value()[0];
         String apiUrl = controllerBeingTested.getAnnotation(RequestMapping.class).value()[0];
@@ -88,23 +92,20 @@ public abstract class AbstractControllerTest {
     public void testBadFormat() throws Exception {
         doThrow(new InvalidResponseException("msg")).when(notificationValidate).hasAllRequiredFields(any(Notification.class));
 
-        assertControllerReturns(ErrorCode.INVALID_RESPONSE, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.INVALID_RESPONSE, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
     @Test
     public void testBadUrlParam() throws Exception {
-        assertControllerReturns(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=dummy")));
     }
 
     // sanity check
     @Test
     public void testWorksWithoutMock() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders //
-                .get(getUrl() + "?url=http://blah.com/dummy")).andExpect(status().isOk()) //
-                .andExpect(content().string(containsString("\"success\" : true"))) //
-                .andExpect(content().string(containsString("\"accountIdentifier\" : ")));
+        assertSuccessResponse(mockMvc.perform(MockMvcRequestBuilders.get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
     @Test
@@ -113,7 +114,7 @@ public abstract class AbstractControllerTest {
         given(twoLeggedControllerHelper.twoLeggedExchange(any(URL.class), any(Class.class))) //
                 .willThrow(NullPointerException.class);
 
-        assertControllerReturns(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
@@ -121,7 +122,7 @@ public abstract class AbstractControllerTest {
     public void testRuntimeExceptionValidate() throws Exception {
         doThrow(NullPointerException.class).when(notificationValidate).hasAllRequiredFields(any(Notification.class));
 
-        assertControllerReturns(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
@@ -129,7 +130,7 @@ public abstract class AbstractControllerTest {
     public void testMonitoring() throws Exception {
         doThrow(new UnauthorizedException("msg")).when(notificationValidate).isNotStateless(anyObject());
 
-        assertControllerReturns(ErrorCode.UNAUTHORIZED, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.UNAUTHORIZED, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
@@ -163,12 +164,7 @@ public abstract class AbstractControllerTest {
         doThrow(NullPointerException.class).when(subscriptionService).notice(any(Notification.class), any(Account.class));
         doThrow(NullPointerException.class).when(subscriptionService).update(any(Notification.class), any(Account.class));
 
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.get(getUrl() + "?url=http://blah.com/dummy"));
-
-        resultActions.andExpect(status().isOk()) //
-                .andExpect(content().string(containsString("\"success\" : false"))) //
-                .andExpect(content().string(containsString("\"errorCode\" : \"" + ErrorCode.UNKNOWN_ERROR.getId() + "\""))) //
-                .andExpect(content().string(containsString("\"message\" : ")));
+        assertErrorResponse(ErrorCode.UNKNOWN_ERROR, mockMvc.perform(MockMvcRequestBuilders.get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
     @Test
@@ -176,15 +172,25 @@ public abstract class AbstractControllerTest {
         given(notification.getType()).willReturn(Type.USER_UPDATED);
         doThrow(new InvalidResponseException("msg")).when(notificationValidate).isExpectedType(any(Type.class), any(Type.class));
 
-        assertControllerReturns(ErrorCode.INVALID_RESPONSE, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.INVALID_RESPONSE, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
-    protected void assertControllerReturns(ErrorCode errorCode, ResultActions resultActions) throws Exception {
-        resultActions.andExpect(status().isOk()) //
-                .andExpect(content().string(containsString("\"success\" : false"))) //
-                .andExpect(content().string(containsString("\"errorCode\" : \"" + errorCode.getId() + "\""))) //
-                .andExpect(content().string(containsString("\"message\" : ")));
+    protected void assertErrorResponse(ErrorCode errorCode, ResultActions resultActions) throws Exception {
+        resultActions.andExpect(status().isOk());
+        TestErrorResponse response = objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), TestErrorResponse.class);
+        assertEquals(false, response.isSuccess());
+        assertEquals(errorCode, response.getErrorCode());
+        verify(subscriptionRepository, never()).save(any(Subscription.class));
+    }
+
+    protected void assertSuccessResponse(ResultActions resultActions) throws Exception {
+        resultActions.andExpect(status().isOk());
+        TestErrorResponse response = objectMapper.readValue(resultActions.andReturn().getResponse().getContentAsString(), TestErrorResponse.class);
+        assertEquals(true, response.isSuccess());
+        assertEquals(null, response.getErrorCode());
+        assertTrue(response.getAccountIdentifier() != null);
+
         verify(subscriptionRepository, never()).save(any(Subscription.class));
     }
 

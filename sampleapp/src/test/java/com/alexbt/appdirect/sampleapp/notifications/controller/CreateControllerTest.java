@@ -32,7 +32,7 @@ public class CreateControllerTest extends AbstractControllerTest {
     public void testAccountFound() throws Exception {
         doThrow(new UnauthorizedException("message")).when(notificationValidate).isNewAccount(any(Account.class));
 
-        assertControllerReturns(ErrorCode.UNAUTHORIZED, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.UNAUTHORIZED, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
@@ -40,7 +40,7 @@ public class CreateControllerTest extends AbstractControllerTest {
     public void testUserAlreadyExist() throws Exception {
         doThrow(new UserAlreadyExistException("message")).when(notificationValidate).isNewUser(any(User.class));
 
-        assertControllerReturns(ErrorCode.USER_ALREADY_EXISTS, mockMvc.perform(MockMvcRequestBuilders //
+        assertErrorResponse(ErrorCode.USER_ALREADY_EXISTS, mockMvc.perform(MockMvcRequestBuilders //
                 .get(getUrl() + "?url=http://blah.com/dummy")));
     }
 
