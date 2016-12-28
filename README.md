@@ -92,7 +92,7 @@ After building the application, go to `./sampleapp/target` folder and type:
 <a name="assumptions"/>
 6) Assumptions
 =================
-- HttpStatus 200: All the answer (success and failure) are returned with HttpStatus 200, except authorization error which returns 401s.
+- **Response HttpStatus** All the answer (success and failure) are returned with HttpStatus 200, except authorization errors which return 401s.
 
 - **Creator**: I defined the 'creator' field as mandatory for 'Create' notification and optional for all other notifications;
 
