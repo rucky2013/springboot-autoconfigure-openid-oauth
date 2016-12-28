@@ -84,7 +84,7 @@ public class OpenIdSecurityConfig extends WebSecurityConfigurerAdapter {
 
             Map<String, String> attributeExchangeFields = openIdAttributeExchange.getProperties();
             for (Entry<String, String> entry : attributeExchangeFields.entrySet()) {
-                attributeExchange.attribute(entry.getKey()).type(attributeExchangeFields.get(entry.getValue())).required(true);
+                attributeExchange.attribute(entry.getKey()).type(entry.getValue()).required(true);
             }
         }
 
