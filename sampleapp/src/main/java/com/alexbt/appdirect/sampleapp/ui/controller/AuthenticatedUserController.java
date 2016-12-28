@@ -1,5 +1,6 @@
 package com.alexbt.appdirect.sampleapp.ui.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,11 @@ import com.alexbt.appdirect.sampleapp.util.WebConstants;
 @RestController
 @PreAuthorize(WebConstants.AUTHORITY_WEB_USER)
 public class AuthenticatedUserController {
+    private static final String COMPANY_UUID = "companyUuid";
+    private static final String COMPANY_NAME = "companyName";
+    private static final String UUID = "uuid";
+    private static final String EMAIL = "email";
+    private static final String FULL_NAME = "fullName";
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticatedUserController.class);
 
     /**
@@ -37,20 +43,27 @@ public class AuthenticatedUserController {
         LOGGER.info("Checking current user");
 
         if (openIDAuthenticationToken != null) {
-            Map<String, String> attributes = openIDAuthenticationToken.getAttributes().stream()
-                    .collect(Collectors.toMap(OpenIDAttribute::getName, o -> o.getValues().get(0)));
+            Map<String, String> attributes = openIdAttributesListToMap(openIDAuthenticationToken.getAttributes());
+
             AuthenticatedUser authenticatedUser = new AuthenticatedUser();
-            authenticatedUser.setName(attributes.get("fullName"));
-            authenticatedUser.setEmail(attributes.get("email"));
-            authenticatedUser.setUuid(attributes.get("uuid"));
-            authenticatedUser.setCompanyName(attributes.get("companyName"));
-            authenticatedUser.setCompanyUuid(attributes.get("companyUuid"));
+            authenticatedUser.setName(attributes.get(FULL_NAME));
+            authenticatedUser.setEmail(attributes.get(EMAIL));
+            authenticatedUser.setUuid(attributes.get(UUID));
+            authenticatedUser.setCompanyName(attributes.get(COMPANY_NAME));
+            authenticatedUser.setCompanyUuid(attributes.get(COMPANY_UUID));
 
             LOGGER.debug("Returning current user: '{}'", authenticatedUser);
             return new ResponseEntity<>(authenticatedUser, HttpStatus.OK);
         }
 
         LOGGER.info("No user logged in");
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        // We should never be here since the current service can only be called by an authenticated user
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+    }
+
+    private Map<String, String> openIdAttributesListToMap(List<OpenIDAttribute> attributes) {
+        return attributes.stream().collect(Collectors.toMap( //
+                OpenIDAttribute::getName, //
+                o -> (o.getValues() != null && !o.getValues().isEmpty()) ? o.getValues().get(0) : null));
     }
 }
