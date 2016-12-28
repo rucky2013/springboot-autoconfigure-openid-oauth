@@ -53,9 +53,9 @@ public class SubscriptionService {
         User creator = notification.getCreator();
         subscription.setCreatorUuid(creator.getUuid());
         subscription.addUser(creator);
-
         subscription.addNotification(notification);
 
+        LOGGER.debug("Saving new subscription: {}", subscription);
         repository.save(subscription);
     }
 
@@ -66,12 +66,14 @@ public class SubscriptionService {
      */
     public void update(Notification notification, Account account) {
         Subscription subscription = repository.findOneByAccountAccountIdentifier(account.getAccountIdentifier());
+        LOGGER.debug("Found current subscription: {}", subscription);
+
         Payload payload = notification.getPayload();
         subscription.setOrder(payload.getOrder());
         subscription.setAccount(payload.getAccount());
-
         subscription.addNotification(notification);
 
+        LOGGER.debug("Saving subscription: {}", subscription);
         repository.save(subscription);
     }
 
@@ -82,10 +84,12 @@ public class SubscriptionService {
      */
     public void addUser(Notification notification, Account account) {
         Subscription subscription = repository.findOneByAccountAccountIdentifier(account.getAccountIdentifier());
-        subscription.addUser(notification.getPayload().getUser());
+        LOGGER.debug("Found current subscription: {}", subscription);
 
+        subscription.addUser(notification.getPayload().getUser());
         subscription.addNotification(notification);
 
+        LOGGER.debug("Saving subscription: {}", subscription);
         repository.save(subscription);
     }
 
@@ -96,10 +100,12 @@ public class SubscriptionService {
      */
     public void removeUser(Notification notification, Account account) {
         Subscription subscription = repository.findOneByAccountAccountIdentifier(account.getAccountIdentifier());
-        subscription.removeUser(notification.getPayload().getUser());
+        LOGGER.debug("Found current subscription: {}", subscription);
 
+        subscription.removeUser(notification.getPayload().getUser());
         subscription.addNotification(notification);
 
+        LOGGER.debug("Saving subscription: {}", subscription);
         repository.save(subscription);
     }
 
@@ -109,6 +115,7 @@ public class SubscriptionService {
      * @param account the account
      */
     public void cancel(Notification notification, Account account) {
+        LOGGER.debug("Removing subscription with account id '{}'", account.getAccountIdentifier());
         repository.deleteByAccountAccountIdentifier(account.getAccountIdentifier());
     }
 
@@ -119,16 +126,19 @@ public class SubscriptionService {
      */
     public void notice(Notification notification, Account account) {
         if (NoticeType.CLOSED.equals(notification.getPayload().getNotice().getType())) {
+            LOGGER.debug("Performing 'cancel' for Notice 'Closed'");
             cancel(notification, account);
 
         } else {
             Subscription subscription = repository.findOneByAccountAccountIdentifier(account.getAccountIdentifier());
+            LOGGER.debug("Found current subscription: {}", subscription);
+
             Payload payload = notification.getPayload();
             subscription.setAccount(payload.getAccount());
             subscription.setNotice(payload.getNotice());
-
             subscription.addNotification(notification);
 
+            LOGGER.debug("Saving subscription: {}", subscription);
             repository.save(subscription);
         }
     }

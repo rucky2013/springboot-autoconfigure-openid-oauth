@@ -62,7 +62,7 @@ public class AuthenticatedUserController {
     }
 
     private Map<String, String> openIdAttributesListToMap(List<OpenIDAttribute> attributes) {
-        return attributes.stream().collect(Collectors.toMap( //
+        return attributes.stream().collect(Collectors.toMap(//
                 OpenIDAttribute::getName, //
                 o -> (o.getValues() != null && !o.getValues().isEmpty()) ? o.getValues().get(0) : null));
     }

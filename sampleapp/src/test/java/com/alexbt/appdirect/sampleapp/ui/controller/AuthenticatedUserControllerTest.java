@@ -70,7 +70,7 @@ public class AuthenticatedUserControllerTest {
     @WithMockOpenIdUser
     public void testNullOpenIDAuthenticationToken() {
         ResponseEntity<AuthenticatedUser> currentUser = userController.getAuthenticatedUser(null);
-        assertEquals(HttpStatus.NOT_FOUND, currentUser.getStatusCode());
+        assertEquals(HttpStatus.UNAUTHORIZED, currentUser.getStatusCode());
         assertEquals(null, currentUser.getBody());
     }
 }

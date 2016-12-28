@@ -26,7 +26,7 @@ public class GenericExceptionHandler {
     @ExceptionHandler
     ResponseEntity<Response> handleUnexpectedRuntime(RuntimeException e) {
         LOGGER.debug("Unexpected error", e);
-        ResponseEntity<Response> responseEntity = new ResponseEntity<Response>( //
+        ResponseEntity<Response> responseEntity = new ResponseEntity<Response>(//
                 new ErrorResponse(ErrorCode.UNKNOWN_ERROR, "An unknown error occured"), HttpStatus.OK);
         LOGGER.debug("Response: {}", responseEntity);
         return responseEntity;

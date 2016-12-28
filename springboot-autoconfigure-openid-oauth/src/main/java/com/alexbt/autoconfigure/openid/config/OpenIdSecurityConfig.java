@@ -1,6 +1,7 @@
 package com.alexbt.autoconfigure.openid.config;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,8 +83,8 @@ public class OpenIdSecurityConfig extends WebSecurityConfigurerAdapter {
                     .attributeExchange(openIdAttributeExchange.getPattern());
 
             Map<String, String> attributeExchangeFields = openIdAttributeExchange.getProperties();
-            for (String attribute : attributeExchangeFields.keySet()) {
-                attributeExchange.attribute(attribute).type(attributeExchangeFields.get(attribute)).required(true);
+            for (Entry<String, String> entry : attributeExchangeFields.entrySet()) {
+                attributeExchange.attribute(entry.getKey()).type(attributeExchangeFields.get(entry.getValue())).required(true);
             }
         }
 

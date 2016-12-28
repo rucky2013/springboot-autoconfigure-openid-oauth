@@ -18,7 +18,7 @@ import com.alexbt.appdirect.notifications.util.Validate;
 public class BeanValidatorUtil {
     private static final BeanValidatorUtil SINGLETON = new BeanValidatorUtil();
 
-    Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+    private Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
     /**
      * Retrieves the singleton instance.
@@ -34,7 +34,6 @@ public class BeanValidatorUtil {
     /**
      * Performs the JSR303 validation on the Notification with the provided Validator implementation
      * @param notification the notification to validate
-     * @param validator the JSR303 validator implementation
      * @return the ConstraintViolation(s), if any error are raised. An empty set is returned otherwise.
      */
     public Set<ConstraintViolation<Notification>> validate(Notification notification) {

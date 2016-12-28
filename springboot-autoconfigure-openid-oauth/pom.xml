@@ -130,8 +130,6 @@
 					<includeTestSourceDirectory>false</includeTestSourceDirectory>
 					<includeTestResources>false</includeTestResources>
 					<configLocation>checkstyle.xml</configLocation>
-					<failOnViolation>true</failOnViolation>
-					<failsOnError>true</failsOnError>
 				</configuration>
 			</plugin>
 

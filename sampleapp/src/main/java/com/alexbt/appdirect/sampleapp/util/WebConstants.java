@@ -1,5 +1,10 @@
 package com.alexbt.appdirect.sampleapp.util;
 
+/**
+ * Shared constants
+ * @author alexbt
+ *
+ */
 public abstract class WebConstants {
 
     public static final String INTG_BASE_URI = "/api";

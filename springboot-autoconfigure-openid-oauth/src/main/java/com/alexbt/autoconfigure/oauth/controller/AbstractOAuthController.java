@@ -53,5 +53,9 @@ public abstract class AbstractOAuthController<T, R> {
 
     protected abstract ResponseEntity<R> handleRequest(T requestBody);
 
+    /**
+     * Retrieves the required oauth authority
+     * @return the required oauth authority
+     */
     public abstract String getOAuthAuthority();
 }

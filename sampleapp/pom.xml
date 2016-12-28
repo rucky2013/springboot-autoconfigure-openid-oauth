@@ -271,8 +271,6 @@
 					<includeTestResources>false</includeTestResources>
 					<includeResources>false</includeResources>
 					<configLocation>checkstyle.xml</configLocation>
-					<failOnViolation>true</failOnViolation>
-					<failsOnError>true</failsOnError>
 				</configuration>
 			</plugin>
 
