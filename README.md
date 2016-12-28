@@ -46,13 +46,12 @@ The application supports several AppDirect integration points:
 
 - **User Unassignment**: https://alexbt-appdirect-sampleapp.herokuapp.com/api/user/unassignment/notification?url={eventUrl}
 
-**OpenId URL (to support Login initiated by the Marketplace)**
-- https://alexbt-appdirect-sampleapp.herokuapp.com/login/openid/appdirect?login=login
+- **OpenId**: https://alexbt-appdirect-sampleapp.herokuapp.com/login/openid/appdirect
 
-**OAuth**
-- For the purpose of this code challenge, the 'key' and 'secret' are kept in plain text in this repository ([application.yml](https://github.com/alexturcot/alexbt-appdirect-sampleapp/blob/master/sampleapp/src/main/resources/application.yml)).
-- OAuth Consumer Key: alexbts-sampleapp-145787
-- OAuth Consumer Secret: V88fbRJpfk3QRJzH
+- **OAuth**
+    - For the purpose of this code challenge, the 'key' and 'secret' are kept in plain text in this repository ([application.yml](https://github.com/alexturcot/alexbt-appdirect-sampleapp/blob/master/sampleapp/src/main/resources/application.yml)).
+    - OAuth Consumer Key: alexbts-sampleapp-145787
+    - OAuth Consumer Secret: V88fbRJpfk3QRJzH
 
 
 <a name="how-to-build"/>
@@ -137,7 +136,7 @@ I did not cover for this scenario. I can only suppose I could reject simultaneou
 
 - **Oauth Key and Secret**: These values are hardcoded in the application's configuration for the purpose of this challenge. A better alternative would have been define the values as Heroku environment variables;
 
-- **Deployed**: The application is deployed on heroku as an executable spring boot jar and uses a MongoDB instance on mlab.com. For the purpose of this challenge, the user/password are hardcoded in the configuration. A better alternative would be to define the password as an Heroku environment variable;
+- **MongoDb**: The application is deployed on heroku as an executable spring boot jar and uses a MongoDB instance on mlab.com. For the purpose of this challenge, the user/password are hardcoded in the configuration. A better alternative would be to define the password as an Heroku environment variable;
 
 - **Continuous deployment**: Throughout the development, the Application was continuously being deployed to Heroku at every commit on GitHub (same setup using bitbucket with 'pipelines' during development).
 
