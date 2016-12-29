@@ -64,7 +64,7 @@ Building and running the application requires:
 - git
 - Minimal console skills :)
 
-After downloading the project from github, open a console into the unzipped folder and type:
+After cloning/downloading the project from github, open a console into the project folder and type:
     
     mvn clean install
     
