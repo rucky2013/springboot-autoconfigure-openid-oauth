@@ -1,7 +1,7 @@
-Table of contents
+Table of Content
 =================
 1. [Continuous Deployment](#continuous-deployment)
-2. [Repository structure](#repository-structure)
+2. [Repository Structure](#repository-structure)
 3. [AppDirect Integration](#appdirect-integration)
 4. [How to Build](#how-to-build)
 5. [How to Launch](#how-to-launch)
@@ -27,7 +27,7 @@ The repository is composed of 3 projects, built by an aggregator pom.xml (not a 
 - springboot-autoconfigure-oauth;
 - sampleapp.
 
-I setup this structure so that it is easy to build (in case anyone needs to rebuild it). After the challenge, I will convert this into 3 repositories. The appdirect-notifications-model and springboot-autoconfigure-oauth will then be fully reusable for other Applications (not just this 'Sample Application').
+I set up this structure so that it is easy to build (in case anyone needs to rebuild it). After the challenge, I will convert this into 3 repositories and deploy the model and openid/oauth to maven centrl. Both projects will then be fully reusable for other Applications (not just this 'Sample Application').
 
 <a name="appdirect-integration"/>
 3) AppDirect Integration
@@ -55,7 +55,7 @@ The application supports several AppDirect integration points:
 
 
 <a name="how-to-build"/>
-4) How to build
+4) How to Build
 ==================
 Building and running the application requires:
 
@@ -114,11 +114,11 @@ I did not cover for this scenario. I can only suppose I could reject simultaneou
 <a name="design-implementation-technical-decisions"/>
 7) Design, Implementation & Technical Decisions
 ====================================
-- **Focus**: My main focus during development was to ensure that the code is testabble;
+- **Focus**: My main focus during development was to ensure that the code is testable;
 
-- **3 Projects**: I split the application into 3 projects: OAuth/OpenId configuration, AppDirect Notification Model and the actual Application. The OAuth/OpenId and Notification Model would be reusable fit the development of another Marketplace Application. I reunited the 3 projects into a single repository just for the purpose of this challenge. I'll later split them into 3 distincts repository: each would have its own development and deployment lifecycle;
+- **3 Projects**: I split the application into 3 projects: OAuth/OpenId configuration, AppDirect Notification Model and the actual Application. The OAuth/OpenId and Notification Model would be reusable for the development of another Marketplace Application. I reunited the 3 projects into a single repository just for the purpose of this challenge. I'll later split them into 3 distinct repositories: each would have its own development and deployment lifecycle;
 
-- **Model Project**: I kept the Notification Model agnostic of any framework, so that is can be used with non-spring applications;
+- **Model Project**: I kept the Notification Model agnostic of any framework, so that it can be used with non-spring applications;
 
 - **OpenId/OAuth Project**: This project is a Spring Boot Auto-configuration. It kicks in just by adding its dependency to a Spring Boot project;
 
@@ -128,13 +128,13 @@ I did not cover for this scenario. I can only suppose I could reject simultaneou
 
 - **Application configuration**: Most (if not all) application configuration is done in the Spring Boot's [application.yml](https://github.com/alexturcot/alexbt-appdirect-sampleapp/blob/master/sampleapp/src/main/resources/application.yml);
 
-- **Static Code Analysis**: The build generates checkstyle, findbugs and jacoco reports. I used them to keep the code clean, avoid obvious bugs and ensure critical components were tests;
+- **Static Code Analysis**: The build generates checkstyle, findbugs and jacoco reports. I used them to keep the code clean, avoid obvious bugs and ensure critical components were tested;
 
 - **TDD**: I somewhat followed the TDD methodology, not so much writing tests 'first' but still writing unit tests as I designed & wrote code.
 
 - **CSRF**: I chose to disable CSRF for the purpose of this Sample Application;
 
-- **Oauth Key and Secret**: These values are hardcoded in the application's configuration for the purpose of this challenge. A better alternative would have been define the values as Heroku environment variables;
+- **Oauth Key and Secret**: These values are hardcoded in the application's configuration for the purpose of this challenge. A better alternative would have been to define the values as Heroku environment variables;
 
 - **MongoDb**: The application is deployed on heroku as an executable spring boot jar and uses a MongoDB instance on mlab.com. For the purpose of this challenge, the user/password are hardcoded in the configuration. A better alternative would be to define the password as an Heroku environment variable;
 
