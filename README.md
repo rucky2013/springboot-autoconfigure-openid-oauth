@@ -120,11 +120,11 @@ I did not cover for this scenario. I can only suppose I could reject simultaneou
 
 - **Model Project**: I kept the Notification Model agnostic of any framework, so that it can be used with non-spring applications;
 
-- **OpenId/OAuth Project**: This project is a Spring Boot Auto-configuration. It kicks in just by adding its dependency to a Spring Boot project;
+- **OpenId/OAuth Project**: This project is a Spring Boot Auto-configuration. It loaded just by adding its dependency to a Spring Boot project;
 
-- **SampleApp Project**: The actual Application project. It contains a ReactJS web UI and a Spring Boot 'backend' (with spring-data-mongodb).
+- **SampleApp Project**: The actual Application project. It contains a ReactJS web UI and a Spring Boot 'backend' (with spring-data-mongodb). This is where the AppDirect Integration points are implemented (CreateController for instance).
 
-- **Account Identifier**: I used a generated UUID for the unique Account Identifier;
+- **Account Identifier**: I used a generated UUID as unique Account Identifier;
 
 - **Application configuration**: Most (if not all) application configuration is done in the Spring Boot's [application.yml](https://github.com/alexturcot/alexbt-appdirect-sampleapp/blob/master/sampleapp/src/main/resources/application.yml);
 
