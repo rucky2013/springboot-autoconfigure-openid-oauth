@@ -92,7 +92,7 @@ After building the application, go to `./sampleapp/target` folder and type:
 <a name="assumptions"/>
 6) Assumptions
 =================
-- **Response HttpStatus**: All the answer (Success and Error) are returned with HttpStatus 200, except authorization errors which return 401s.
+- **Response HttpStatus**: All the answers (Success and Error) are returned with HttpStatus 200, except authorization errors which return 401s.
 
 - **Creator**: I defined the 'creator' field as mandatory for 'Create' notification and optional for all other notifications;
 
@@ -106,7 +106,7 @@ After building the application, go to `./sampleapp/target` folder and type:
 
 - **Company's fields**: Email, phoneNumber and website are identified as "required" in the documentation. However after setting empty values for these fields in my user profile, the integration tests were sending notifications with null values. I thus chose to support empty values for email, phoneNumber and website;
 
-- **Concurrent Order Notification**: I tested concurrent Order sent from different users within the same company (I logged in twice with 2 different users and simultaneously sent Subscription Order Notifications from the 'Integration Tests' page. While the first Order notification was being processed, the second notification immediately returned with an error. AppDirect remained consistent and only the first Order was considered valid. However, my application received both Order event and created 2 distinct subscriptions for 2 users.
+- **Concurrent Order Notification**: I tested concurrent Order sent from different users within the same company (I logged in twice with 2 different users and simultaneously sent Subscription Order Notifications from the 'Integration Tests' page). While the first Order notification was being processed, the second notification immediately returned with an error. AppDirect remained consistent and only the first Order was considered valid. However, my application received both Order events and created 2 distinct subscriptions for 2 users.
 I did not cover for this scenario. I can only suppose I could reject simultaneous Order from the same Company, however I did not see this requirement anywhere and wouldn't want to implement such restriction for such a corner case without a deeper understanding.  
  
  
@@ -114,13 +114,13 @@ I did not cover for this scenario. I can only suppose I could reject simultaneou
 <a name="design-implementation-technical-decisions"/>
 7) Design, Implementation & Technical Decisions
 ====================================
-- **Focus**: My main focus during development was to ensure that the code is testable;
+- **Focus**: My main focus during development was to ensure that the code is testable/tested, simple and reusable;
 
-- **3 Projects**: I split the application into 3 projects: OAuth/OpenId configuration, AppDirect Notification Model and the actual Application. The OAuth/OpenId and Notification Model would be reusable for the development of another Marketplace Application. I reunited the 3 projects into a single repository just for the purpose of this challenge. I'll later split them into 3 distinct repositories: each would have its own development and deployment lifecycle;
+- **3 Projects**: I split the application into 3 projects: **OAuth/OpenId spring-boot configuration**, **AppDirect Notification Model** and the actual Application **sampleapp**. The 'OAuth/OpenId' and 'Notification Model' projects could be reused for the development of another Marketplace Application. I kept the 3 projects into a single repository just for the purpose of this challenge. I'll later split them into 3 distinct repositories: each would have its own development and deployment lifecycle;
 
-- **Model Project**: I kept the Notification Model agnostic of any framework, so that it can be used with non-spring applications;
+- **Model Project**: I kept the Notification Model agnostic of any framework so that it can be used with non-spring applications;
 
-- **OpenId/OAuth Project**: This project is a Spring Boot Auto-configuration. It loaded just by adding its dependency to a Spring Boot project;
+- **OpenId/OAuth Project**: This project is a Spring Boot Auto-configuration. It gets loaded just by adding its dependency to a Spring Boot project;
 
 - **SampleApp Project**: The actual Application project. It contains a ReactJS web UI and a Spring Boot 'backend' (with spring-data-mongodb). This is where the AppDirect Integration points are implemented (CreateController for instance).
 
