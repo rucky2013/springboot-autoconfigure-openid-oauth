@@ -1,9 +1,0 @@
-create: https://marketplace.appdirect.com/api/integration/v1/events/7bff5d40-bf37-4a4c-a133-91e67b3e0781
-
-user-unassign: https://marketplace.appdirect.com/api/integration/v1/events/c483c8f6-f674-402e-9d7c-bdc243117c3e
-user-assign: https://marketplace.appdirect.com/api/integration/v1/events/15585d29-7c56-49cd-ba9c-1ddadfb3e10b
-
-cancel: https://marketplace.appdirect.com/api/integration/v1/events/cd08690f-72a7-42d0-8860-3dc51b331af0
-
-
-change: https://marketplace.appdirect.com/api/integration/v1/events/cb2c0e61-b47f-4770-8dc2-6c52a6c777ac
