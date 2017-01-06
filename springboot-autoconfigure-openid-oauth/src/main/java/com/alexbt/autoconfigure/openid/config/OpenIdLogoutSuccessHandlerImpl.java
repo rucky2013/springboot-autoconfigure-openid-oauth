@@ -55,7 +55,9 @@ public class OpenIdLogoutSuccessHandlerImpl implements LogoutSuccessHandler {
         LOGGER.debug("Logging out principal '{}'", authentication);
 
         try {
-            if (authentication.getPrincipal() != null && authentication.getPrincipal() instanceof User) {
+            if (authentication == null) {
+                LOGGER.debug("No user is currently logged in");
+            } else if (authentication.getPrincipal() != null && authentication.getPrincipal() instanceof User) {
                 LOGGER.debug("Logging out principal '{}'", authentication.getPrincipal());
                 final String openIdUrl = ((User) authentication.getPrincipal()).getUsername();
                 LOGGER.debug("Logging out '{}'", openIdUrl);
