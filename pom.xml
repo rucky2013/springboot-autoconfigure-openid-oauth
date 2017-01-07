@@ -5,7 +5,7 @@
 	<groupId>com.alexbt</groupId>
 	<artifactId>springboot-autoconfigure-openid-oauth</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.9</version>
+	<version>1.0.10-SNAPSHOT</version>
 	
 	<name>alexbt's Spring Boot Openid and OAuth autoconfiguration</name>
 	<description>Spring Boot Autoconfiguration enabling openid and oauth security</description>

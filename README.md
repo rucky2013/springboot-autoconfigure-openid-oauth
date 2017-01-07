@@ -7,17 +7,7 @@ This repository contains a Spring-Boot autoconfiguration for OpenId and OAuth su
 
 2. How to use
 --------------
-I'm currently in the process of setting up deployment/releases and automatic synchronisation to maven central. In the mean time, to use this library, you need to add the following repository:
-
-	<repositories>
-		<repository>
-			<id>oss-releases</id>
-			<name>oss-releases</name>
-			<url>https://oss.sonatype.org/content/repositories/releases</url>
-		</repository>
-	</repositories>
-	
-And the following dependency:
+To use this library, add the following dependency:
 
 	<dependency>
 		<groupId>com.alexbt</groupId>
