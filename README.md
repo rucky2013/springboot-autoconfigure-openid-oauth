@@ -1,11 +1,11 @@
-#1. What is this?
------------------
+1. What is this?
+----------------
 This repository contains a Spring-Boot autoconfiguration for OpenId and OAuth support.
 
 - More details will be added later on how to use it.
 - In the mean time, you may take a look at https://github.com/alexbt/appdirect-sampleapp to see how it's being used.
 
-#2. How to use
+2. How to use
 --------------
 At the moment, this library has only been deployed to maven central as SNAPSHOT. 
 To use it, you need to add the following repository:
