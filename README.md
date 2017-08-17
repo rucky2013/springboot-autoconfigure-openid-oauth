@@ -3,7 +3,7 @@
 This repository contains a Spring-Boot autoconfiguration for OpenId and OAuth support.
 
 - More details will be added later on how to use it.
-- In the mean time, you may take a look at https://github.com/alexbt/appdirect-sampleapp to see how it's being used.
+- In the mean time, you may take a look at https://github.com/alexbt/alexbt-challenge-appdirect to see how it's being used.
 
 2. How to use
 --------------
